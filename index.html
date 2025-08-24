@@ -1,0 +1,952 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vinay Babu Palika - Cloud Solutions Architect</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --secondary-gradient: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            --dark-gradient: linear-gradient(135deg, #0c0c0c 0%, #1a1a1a 100%);
+            --glass: rgba(255, 255, 255, 0.1);
+            --glass-border: rgba(255, 255, 255, 0.2);
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #fff;
+            background: var(--dark-gradient);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Animated Background */
+        .animated-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: var(--dark-gradient);
+        }
+
+        .animated-bg::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 20% 50%, #667eea22 0%, transparent 50%),
+                        radial-gradient(circle at 80% 20%, #764ba222 0%, transparent 50%),
+                        radial-gradient(circle at 40% 80%, #f093fb22 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(-50px, -50px) rotate(0deg); }
+            50% { transform: translate(50px, 50px) rotate(180deg); }
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Glassmorphism Header */
+        header {
+            position: fixed;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: calc(100% - 40px);
+            max-width: 1200px;
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            z-index: 1000;
+            padding: 0 30px;
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            font-size: 1.2rem;
+            font-weight: 800;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 500;
+            font-size: 0.9rem;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        main {
+            margin-top: 0;
+        }
+
+        /* Hero Section with 3D Effects */
+        .hero {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-content {
+            z-index: 1;
+            max-width: 800px;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 900;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, #fff 0%, #667eea 50%, #764ba2 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 0 40px rgba(102, 126, 234, 0.3);
+            animation: glow 3s ease-in-out infinite alternate;
+        }
+
+        @keyframes glow {
+            from { filter: drop-shadow(0 0 20px rgba(102, 126, 234, 0.3)); }
+            to { filter: drop-shadow(0 0 40px rgba(118, 75, 162, 0.5)); }
+        }
+
+        .hero .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 300;
+        }
+
+        .hero .description {
+            font-size: 1.1rem;
+            margin: 0 auto 3rem;
+            line-height: 1.8;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 600px;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: var(--glass);
+            color: white;
+            padding: 18px 40px;
+            border: 1px solid var(--glass-border);
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(20px);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            transform: translateY(-3px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        /* Modern Sections */
+        .section {
+            padding: 120px 0;
+            position: relative;
+        }
+
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3.5rem);
+            text-align: center;
+            margin-bottom: 4rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #fff 0%, #667eea 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Skills Grid with Bento Box Style */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .skill-category {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .skill-category::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 1px;
+            background: var(--primary-gradient);
+        }
+
+        .skill-category:hover {
+            transform: translateY(-10px);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.2);
+        }
+
+        .skill-category h3 {
+            color: #fff;
+            margin-bottom: 1.5rem;
+            font-size: 1.4rem;
+            font-weight: 700;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .skill-tag {
+            background: rgba(102, 126, 234, 0.2);
+            border: 1px solid rgba(102, 126, 234, 0.3);
+            color: #fff;
+            padding: 0.6rem 1rem;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .skill-tag:hover {
+            background: rgba(102, 126, 234, 0.4);
+            transform: translateY(-2px);
+        }
+
+        /* Timeline with Modern Design */
+        .experience-timeline {
+            position: relative;
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+
+        .experience-timeline::before {
+            content: '';
+            position: absolute;
+            left: 50px;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary-gradient);
+        }
+
+        .timeline-item {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            margin: 3rem 0;
+            padding: 2.5rem;
+            border-radius: 24px;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            margin-left: 100px;
+            transition: all 0.4s ease;
+        }
+
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -65px;
+            top: 30px;
+            width: 30px;
+            height: 30px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            box-shadow: 0 0 0 4px rgba(0, 0, 0, 0.8), 0 0 0 8px rgba(102, 126, 234, 0.3);
+        }
+
+        .timeline-item:hover {
+            transform: translateX(10px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .job-title {
+            color: #667eea;
+            font-size: 1.4rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .company-name {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0.5rem;
+        }
+
+        .job-duration {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 1.5rem;
+            font-style: italic;
+        }
+
+        /* Certification Cards with Official Logos */
+        .certifications-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 2rem;
+            margin-top: 3rem;
+        }
+
+        .cert-card {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            color: #fff;
+            padding: 2.5rem;
+            border-radius: 24px;
+            text-align: center;
+            transition: all 0.4s ease;
+            border: 1px solid var(--glass-border);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cert-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--primary-gradient);
+        }
+
+        .cert-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 0 25px 50px rgba(102, 126, 234, 0.3);
+        }
+
+        .cert-logo {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: #fff;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Official Provider Logo Styles */
+        .cert-logo.aws {
+            <!-- background: linear-gradient(135deg, #ff9900 0%, #ec7211 100%); -->
+            box-shadow: 0 8px 25px rgba(255, 153, 0, 0.4);
+        }
+
+        .
+        -logo.aws::after {
+            content: 'AWS';
+            font-size: 1.2rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+        }
+
+        .cert-logo.azure {
+            <!-- background: linear-gradient(135deg, #0078d4 0%, #005a9e 100%); -->
+            box-shadow: 0 8px 25px rgba(0, 120, 212, 0.4);
+        }
+
+        .cert-logo.azure::after {
+            content: 
+            font-size: 2.5rem;
+        }
+
+        .cert-logo.terraform {
+            <!-- background: linear-gradient(135deg, #623ce4 0%, #7c3aed 100%); -->
+            box-shadow: 0 8px 25px rgba(98, 60, 228, 0.4);
+        }
+
+        .cert-logo.terraform::after {
+            content: 
+            font-size: 2rem;
+            transform: rotate(0deg);
+        }
+
+        .cert-logo.ai {
+            <!-- background: linear-gradient(135deg, #00d4ff 0%, #5b73ff 100%); -->
+            box-shadow: 0 8px 25px rgba(0, 212, 255, 0.4);
+        }
+
+        .cert-logo.ai::after {
+            content: 
+            font-size: 2.5rem;
+        }
+
+        .cert-logo.mongodb {
+            <!-- background: linear-gradient(135deg, #47a248 0%, #3d8b40 100%); -->
+            box-shadow: 0 8px 25px rgba(71, 162, 72, 0.4);
+        }
+
+        .cert-logo.mongodb::after {
+            content: 
+            font-size: 2rem;
+        }
+
+        .cert-logo.sql {
+            <!-- background: linear-gradient(135deg, #336791 0%, #2d5f85 100%);     -->
+            box-shadow: 0 8px 25px rgba(51, 103, 145, 0.4);
+        }
+
+        .cert-logo.sql::after {
+            content: 
+            font-size: 2rem;
+        }
+
+        .cert-logo.udemy {
+            <!-- background: linear-gradient(135deg, #ec5252 0%, #b91c1c 100%); -->
+            box-shadow: 0 8px 25px rgba(236, 82, 82, 0.4);
+        }
+
+        .cert-logo.udemy::after {
+            content: 
+            font-size: 2rem;
+            font-weight: 900;
+        }
+
+        .cert-card h3 {
+            color: #fff;
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .cert-card p {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1rem;
+            font-weight: 500;
+        }
+
+        /* Contact Section */
+        .contact-section {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            border-top: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            margin-top: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .contact-item {
+            background: var(--glass);
+            backdrop-filter: blur(20px);
+            padding: 1.5rem 2rem;
+            border-radius: 16px;
+            border: 1px solid var(--glass-border);
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            transform: translateY(-5px);
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        .contact-item a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .contact-emoji {
+            font-size: 1.5rem;
+        }
+
+        /* Mobile Responsiveness */
+        @media (max-width: 768px) {
+            header {
+                top: 10px;
+                width: calc(100% - 20px);
+                padding: 0 20px;
+            }
+
+            .nav-links {
+                display: none;
+            }
+            
+            .hero h1 {
+                font-size: 3rem;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .contact-info {
+                flex-direction: column;
+                gap: 1rem;
+            }
+            
+            .skills-grid,
+            .certifications-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .timeline-item {
+                margin-left: 50px;
+            }
+
+            .experience-timeline::before {
+                left: 25px;
+            }
+
+            .timeline-item::before {
+                left: -40px;
+                width: 20px;
+                height: 20px;
+            }
+        }
+
+        /* Scroll Animations */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s ease;
+        }
+
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <div class="animated-bg"></div>
+
+    <header>
+        <nav>
+            <div class="logo">Vinay Babu Palika</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#skills">Skills</a></li>
+                <li><a href="#experience">Experience</a></li>
+                <li><a href="#certifications">Certifications</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Vinay Babu Palika</h1>
+                <p class="subtitle">Cloud Enterprise Architect</p>
+                <p class="description">
+                    15+ years of experience in enterprise cloud infrastructure design, identity and access management (IAM), 
+                    and cloud security governance across AWS, Azure, and GCP environments.
+                </p>
+                <a href="#contact" class="cta-button">Let's Connect</a>
+            </div>
+        </section>
+
+        <section id="skills" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Technical Expertise</h2>
+                <div class="skills-grid">
+                    <div class="skill-category fade-in">
+                        <h3>☁️ Cloud Platforms</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">AWS</span>
+                            <span class="skill-tag">Microsoft Azure</span>
+                            <span class="skill-tag">Google Cloud Platform</span>
+                            <span class="skill-tag">Multi-Cloud Architecture</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category fade-in">
+                        <h3>🔒 Security & IAM</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Azure Entra ID</span>
+                            <span class="skill-tag">AWS IAM</span>
+                            <span class="skill-tag">Active Directory</span>
+                            <span class="skill-tag">PIM & PAM</span>
+                            <span class="skill-tag">SSO & SAML</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category fade-in">
+                        <h3>⚡ Infrastructure as Code</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Terraform</span>
+                            <span class="skill-tag">Ansible</span>
+                            <span class="skill-tag">CloudFormation</span>
+                            <span class="skill-tag">ARM Templates</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category fade-in">
+                        <h3>🚀 DevOps & Automation</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">Jenkins</span>
+                            <span class="skill-tag">Docker</span>
+                            <span class="skill-tag">Kubernetes</span>
+                            <span class="skill-tag">Python Boto3</span>
+                            <span class="skill-tag">CI/CD Pipelines</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category fade-in">
+                        <h3>💾 Databases</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">PostgreSQL</span>
+                            <span class="skill-tag">MySQL</span>
+                            <span class="skill-tag">Snowflake</span>
+                            <span class="skill-tag">MongoDB</span>
+                            <span class="skill-tag">RDS & Aurora</span>
+                        </div>
+                    </div>
+                    
+                    <div class="skill-category fade-in">
+                        <h3>📊 Monitoring & Analytics</h3>
+                        <div class="skill-tags">
+                            <span class="skill-tag">CloudWatch</span>
+                            <span class="skill-tag">Azure Monitor</span>
+                            <span class="skill-tag">Prometheus</span>
+                            <span class="skill-tag">ELK Stack</span>
+                            <span class="skill-tag">DataDog</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="experience" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Professional Journey</h2>
+                <div class="experience-timeline">
+                    <div class="timeline-item fade-in">
+                        <div class="job-title">Senior Cloud & DevOps Architect</div>
+                        <div class="company-name">JP Morgan Chase (LRI)</div>
+                        <div class="job-duration">October 2024 - Present</div>
+                        <p>Leading enterprise-grade cloud infrastructure using AWS services, implementing IaC practices with Terraform, and managing multi-region database environments with AWS Redshift, Aurora, and DynamoDB. Driving cost optimization initiatives achieving $1.5M yearly savings.</p>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <div class="job-title">Senior Cloud & DevOps Architect</div>
+                        <div class="company-name">Toyota Motors North America</div>
+                        <div class="job-duration">August 2023 - September 2024</div>
+                        <p>Orchestrated Cloud Center of Excellence (CCoE) implementation, defined multi-cloud security baselines with GDPR and HIPAA compliance, and integrated CDP platforms for real-time customer experiences across omnichannel B2C platforms.</p>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <div class="job-title">Senior Cloud Solutions Architect</div>
+                        <div class="company-name">Cognizant Technology Solutions - Caterpillar Inc.</div>
+                        <div class="job-duration">June 2022 - June 2023</div>
+                        <p>Architected AWS solutions for large-scale enterprise clients, implemented Zero Trust architecture with Azure AD B2C and AWS Cognito, and deployed Amazon Connect solutions with Salesforce and ServiceNow integrations.</p>
+                    </div>
+                    
+                    <div class="timeline-item fade-in">
+                        <div class="job-title">Solutions Architect</div>
+                        <div class="company-name">Cognizant Technology Solutions - Merck Pharmaceuticals</div>
+                        <div class="job-duration">December 2021 - May 2022</div>
+                        <p>Led Azure Entra ID IAM solution implementations, managed cross-region disaster recovery planning, and designed multi-tier application architectures with auto-healing and health checks using AWS and Azure services.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="certifications" class="section">
+            <div class="container">
+                <h2 class="section-title fade-in">Certifications & Recognition</h2>
+                <div class="certifications-grid">
+                    <div class="cert-card fade-in">
+                        <div class="cert-logo aws">
+                            <img src="https://miro.medium.com/0*LdVa8X69Jwln0fHZ.png" alt="cert-logo aws" style="width: 100px; height: 80px;">
+                        </div>
+                        <h3>AWS Solutions Architect</h3>
+                        <p>Associate Level Certification</p>
+                    </div>
+                    
+                    <div class="cert-card fade-in">
+                        <div class="cert-logo azure">
+                            <img src="https://miro.medium.com/v2/resize:fit:600/0*N-XbFqiSi1yEK0yi.png" alt="cert-logo azure" style="width: 100px; height: 80px;">
+                        </div>
+                        <h3>Azure Solutions Architect Expert</h3>
+                        <p>AZ-305 Microsoft Certified</p>
+                    </div>
+                    
+                    <div class="cert-card fade-in">
+                        <div class="cert-logo terraform">
+                            <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTSugSMG3431ENBv-oZgop9Mh3gyc6utbwbhw&s" alt="cert-logo terraform" style="width: 100px; height: 80px;">
+                        </div>
+                        <h3>HashiCorp Terraform Associate</h3>
+                        <p>003 Infrastructure Automation</p>
+                    </div>
+                    
+                    <div class="cert-card fade-in">
+                        <div class="cert-logo ai">
+                            <img src="https://images.credly.com/images/f5c094f4-e07c-44e0-b685-4ffd8980fd53/blob" alt="cert-logo ai" style="width: 100px; height: 80px;">
+                        </div>
+                        <h3>Generative AI for Project Managers</h3>
+                        <p>Advanced AI Implementation</p>
+                    </div>
+                    
+                    <div class="cert-card fade-in">
+                        <div class="cert-logo mongodb">
+                            <img src="https://images.credly.com/images/ff52a038-c61e-4088-b434-2e98ef546896/image.png" alt="cert-logo mongodb" style="width: 100px; height: 80px;">
+                        </div>
+                        <h3>MongoDB Associate Developer</h3>
+                        <p>NoSQL Database Certification</p>
+                    </div>
+                    
+                    <div class="cert-card fade-in">
+                        <div class="cert-logo sql">
+                            <img src="https://yt3.googleusercontent.com/Y_G09q2it3FZMrbbxwLjgMjSanR1mZAsXnEE6g6ZaBXlq2dLIRsKqSrGTCMuiyvvVavu-xFvPEc=s900-c-k-c0x00ffffff-no-rj" alt="cert-logo sql" style="width: 100px; height: 80px;">
+                        </div>
+                        <h3>Master SQL for Data Science</h3>
+                        <p>Advanced Database Analytics</p>
+                    </div>
+                    
+                    <div class="cert-card fade-in">
+                        <div class="cert-logo azure">
+                            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/f/fa/Microsoft_Azure.svg/800px-Microsoft_Azure.svg.png" alt="cert-logo azure" style="width: 100px; height: 80px;">
+                        </div>
+                        <h3>Microsoft Azure Fundamentals</h3>
+                        <p>Core Azure Services & Concepts</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <h2 class="section-title fade-in">Let's Build Something Amazing</h2>
+                <p style="font-size: 1.2rem; margin-bottom: 3rem; opacity: 0.9; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Ready to transform your cloud infrastructure? Let's discuss how we can architect solutions that drive innovation and growth.
+                </p>
+                <div class="contact-info">
+                    <div class="contact-item fade-in">
+                        <a href="mailto:pvb.1916@gmail.com">
+                            <span class="contact-emoji">📧</span>
+                            <span>pvb.1916@gmail.com</span>
+                        </a>
+                    </div>
+                    <div class="contact-item fade-in">
+                        <a href="tel:+18483369061">
+                            <span class="contact-emoji">📱</span>
+                            <span>+1 (848) 336-9061</span>
+                        </a>
+                    </div>
+                    <div class="contact-item fade-in">
+                        <a href="https://www.linkedin.com/in/vinay-babu-pal-7734b4138" target="_blank">
+                            <span class="contact-emoji">💼</span>
+                            <span>LinkedIn Profile</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script>
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Intersection Observer for fade-in animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.querySelectorAll('.fade-in').forEach(item => {
+            observer.observe(item);
+        });
+
+        // Parallax scrolling effect
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const rate = scrolled * -0.5;
+            
+            const animatedBg = document.querySelector('.animated-bg::before');
+            if (animatedBg) {
+                animatedBg.style.transform = `translate3d(0, ${rate}px, 0)`;
+            }
+        });
+
+        // Add dynamic cursor effect
+        document.addEventListener('mousemove', (e) => {
+            const cursor = document.querySelector('.cursor');
+            if (!cursor) {
+                const cursorElement = document.createElement('div');
+                cursorElement.className = 'cursor';
+                cursorElement.style.cssText = `
+                    position: fixed;
+                    width: 20px;
+                    height: 20px;
+                    background: radial-gradient(circle, rgba(102, 126, 234, 0.8), transparent);
+                    border-radius: 50%;
+                    pointer-events: none;
+                    z-index: 9999;
+                    transition: all 0.1s ease;
+                `;
+                document.body.appendChild(cursorElement);
+            }
+            
+            const cursorEl = document.querySelector('.cursor');
+            cursorEl.style.left = e.clientX - 10 + 'px';
+            cursorEl.style.top = e.clientY - 10 + 'px';
+        });
+
+        // Add hover effects for interactive elements
+        document.querySelectorAll('.cert-card, .skill-category, .timeline-item, .contact-item').forEach(item => {
+            item.addEventListener('mouseenter', function() {
+                this.style.transform += ' scale(1.02)';
+            });
+            
+            item.addEventListener('mouseleave', function() {
+                this.style.transform = this.style.transform.replace(' scale(1.02)', '');
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(255, 255, 255, 0.15)';
+                header.style.borderColor = 'rgba(255, 255, 255, 0.25)';
+            } else {
+                header.style.background = 'rgba(255, 255, 255, 0.1)';
+                header.style.borderColor = 'rgba(255, 255, 255, 0.2)';
+            }
+        });
+
+        // Add typing effect to hero title (optional enhancement)
+        function typeWriter(element, text, speed = 100) {
+            let i = 0;
+            element.innerHTML = '';
+            
+            function type() {
+                if (i < text.length) {
+                    element.innerHTML += text.charAt(i);
+                    i++;
+                    setTimeout(type, speed);
+                }
+            }
+            type();
+        }
+
+        // Initialize typing effect on load
+        window.addEventListener('load', () => {
+            const heroTitle = document.querySelector('.hero h1');
+            const originalText = heroTitle.textContent;
+            // Uncomment the line below if you want typing effect
+            // typeWriter(heroTitle, originalText, 80);
+        });
+
+        // Add smooth reveal for certification cards
+        const certCards = document.querySelectorAll('.cert-card');
+        certCards.forEach((card, index) => {
+            card.style.animationDelay = `${index * 0.1}s`;
+        });
+
+        // Performance optimization - throttle scroll events
+        function throttle(func, limit) {
+            let inThrottle;
+            return function() {
+                const args = arguments;
+                const context = this;
+                if (!inThrottle) {
+                    func.apply(context, args);
+                    inThrottle = true;
+                    setTimeout(() => inThrottle = false, limit);
+                }
+            }
+        }
+
+        // Apply throttling to scroll events
+        window.addEventListener('scroll', throttle(() => {
+            // Scroll-based animations can be added here
+        }, 16)); // ~60fps
+    </script>
+</body>
+</html>
